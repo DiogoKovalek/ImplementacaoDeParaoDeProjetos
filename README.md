@@ -43,13 +43,29 @@ Entretanto, como os objetos da cena são destruídos ao carregar uma nova cena, 
 Para resolver esse problema, foi criado um objeto denominado `GameManager`, contendo um script em C# derivado de `MonoBehaviour`. Esse objeto utiliza o padrão de projeto Singleton, garantindo que exista apenas uma única instância do `GameManager` durante toda a execução da aplicação.<br>
 Além disso, o objeto é marcado com `DontDestroyOnLoad`, permitindo que ele não seja destruído durante as trocas de cena. Dessa forma, as variáveis armazenadas no `GameManager` permanecem acessíveis em qualquer parte do jogo, independentemente da cena carregada.<br>
 <br>
+
 * **Explicação do código**<br>
 Presente dentro do código
 
 ### Estrutural -> Proxy
 * **Contexto**<br>
+Durante o desenvolvimento de um sistema de gerenciamento de arquivos, algumas operações exigiam acesso a documentos armazenados em um servidor remoto. Esses arquivos poderiam conter informações sensíveis, como relatórios administrativos e dados confidenciais de usuários.<br>
+O sistema possuía diferentes tipos de usuários, cada um com permissões específicas de acesso aos arquivos.<br>
+<br>
+
 * **Problema**<br>
+Na implementação inicial, qualquer parte do sistema podia acessar diretamente o objeto responsável pela leitura dos arquivos remotos. Isso gerava problemas relacionados à segurança e ao controle de acesso, pois não existia uma camada intermediária responsável por validar permissões antes da execução da operação.<br>
+Além disso, operações remotas podem possuir alto custo computacional ou de rede, tornando inadequado permitir acessos indiscriminados ao objeto principal.<br>
+Essa abordagem também dificultava a adição de funcionalidades extras, como cache, logs de acesso e autenticação, sem modificar diretamente a classe original.<br>
+<br>
+
 * **Solução**<br>
+Para resolver esse problema, foi utilizado o padrão estrutural Proxy.<br>
+Nesse padrão, um objeto intermediário chamado `Proxy` é criado para representar o objeto real do sistema. O Proxy possui a mesma interface do objeto principal, permitindo que o cliente utilize ambos da mesma forma.<br>
+Entretanto, antes de encaminhar a requisição para o objeto real, o Proxy pode executar verificações adicionais, como autenticação de usuário, controle de permissões, geração de logs ou otimizações de desempenho.<br>
+Dessa forma, o acesso ao objeto principal passou a ser controlado de maneira transparente, aumentando a segurança, reduzindo o acoplamento e facilitando a manutenção do sistema.<br>
+<br>
+
 * **Explicação do código**<br>
 Presente dentro do código
 
